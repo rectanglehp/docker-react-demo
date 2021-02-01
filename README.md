@@ -3,9 +3,28 @@ React-Docker-Task
 
 Demo project running react application with docker-container.
 
+Clone this repo:
+
 ```
-sudo docker build -t hello:wl .
-sudo docker run -p 8080:80 -d hello:wl
+git clone https://github.com/rectanglehp/docker-react-demo
 ```
-Then go http://localhost:8080
+
+Chnage working directory:
+```
+cd docker-react-demo
+```
+
+Then you need to build image with application:
+```
+docker build -t mya:pp .
+```
+
+Let's run just created container!
+```
+docker run -p 8080:3000 mya:pp
+```
+
+Then go to http://localhost:8080
+
+Enjoy!
 
