@@ -1,25 +1,13 @@
-FROM debian
+FROM tiangolo/node-frontend:10 as bld-stg
 
-RUN apt-get update &&\ 
-  apt-get -y upgrade &&\ 
-  apt-get -y install npm git curl software-properties-common &&\
-  curl -sL https://deb.nodesource.com/setup_15.x | bash -
+WORKDIR /app
 
-
-
-COPY my-app/ /var/www/html/
-
-RUN ls -lah /var/www/html/
-
-WORKDIR "/var/www/html/"
-
+COPY my-app/package*.json /app/
 RUN npm install
-  #npx browserslist@latest --update-db &&\
-  #echo "daemon off;" >> /etc/nginx/nginx.conf &&\
-  #echo "npm start && nginx" > sf
+COPY my-app/ /app/
+RUN npm run build
 
-EXPOSE 3000
+FROM nginx:1.15
+COPY --from=build-stage /app/build/ /usr/share/nginx/html
 
-STOPSIGNAL SIGTERM
-
-CMD ["npm","start"]
+COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf

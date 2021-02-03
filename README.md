@@ -16,12 +16,12 @@ cd docker-react-demo
 
 Then you need to build image with application:
 ```
-docker build -t mya:pp .
+docker build -t mbd .
 ```
 
 Let's run just created container!
 ```
-docker run -p 8080:3000 mya:pp
+docker run -p 8080:80 mbd
 ```
 
 Then go to http://localhost:8080
