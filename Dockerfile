@@ -8,6 +8,6 @@ COPY my-app/ /app/
 RUN npm run build
 
 FROM nginx:1.15
-COPY --from=build-stage /app/build/ /usr/share/nginx/html
+COPY --from=bld-stg /app/build/ /usr/share/nginx/html
 
-COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=bld-stg /nginx.conf /etc/nginx/conf.d/default.conf
